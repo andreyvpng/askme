@@ -9,7 +9,7 @@ from .models import Answer, Question
 
 
 class AnswerDetailView(DetailView):
-    model = Answer
+    queryset = Answer.objects.all_with_question()
 
 
 class CreateQuestionView(LoginRequiredMixin, CreateView):
@@ -42,8 +42,7 @@ class ProfileDetailView(DetailView):
     def get_context_data(self, **kwargs):
         ctx = super().get_context_data(**kwargs)
 
-        answered_questions = Question.objects.exclude(answer=None).filter(
-            asked_to=self.object).select_related('answer').order_by('-created')
+        answered_questions = Question.objects.all_that_have_an_answer()
 
         ctx.update({'questions': answered_questions})
 
