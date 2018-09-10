@@ -1,5 +1,7 @@
+from django.conf import settings
 from django.contrib.auth.models import User
-from django.views.generic import DetailView
+from django.urls.base import reverse
+from django.views.generic import DetailView, RedirectView
 
 from .forms import QuestionForm
 from .models import Question
@@ -25,3 +27,18 @@ class ProfileDetailView(DetailView):
         ctx.update({'question_form': question_form})
 
         return ctx
+
+
+class MyProfileView(RedirectView):
+    def get_redirect_url(self, *args, **kwargs):
+        if self.request.user.is_authenticated:
+            return reverse(
+                'core:profile',
+                kwargs={
+                    'pk': self.request.user.id
+                }
+            )
+        else:
+            return reverse(
+                settings.LOGIN_URL
+            )
