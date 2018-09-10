@@ -16,8 +16,9 @@ class QuestionManager(models.Manager):
         qs = qs.select_related('answer')
         return qs
 
-    def all_that_have_an_answer(self):
+    def all_that_have_an_answer(self, user):
         qs = self.all_with_answer()
+        qs = qs.filter(asked_to=user)
         qs = qs.exclude(answer=None)
         qs = qs.order_by('-created')
         return qs

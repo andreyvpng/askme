@@ -42,7 +42,9 @@ class ProfileDetailView(DetailView):
     def get_context_data(self, **kwargs):
         ctx = super().get_context_data(**kwargs)
 
-        answered_questions = Question.objects.all_that_have_an_answer()
+        answered_questions = Question.objects.all_that_have_an_answer(
+            self.object
+        )
 
         ctx.update({'questions': answered_questions})
 
