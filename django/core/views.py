@@ -2,7 +2,7 @@ from django.conf import settings
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.models import User
 from django.urls.base import reverse
-from django.views.generic import CreateView, DetailView, RedirectView
+from django.views.generic import CreateView, DetailView, ListView, RedirectView
 
 from .forms import QuestionForm
 from .models import Answer, Question
@@ -69,3 +69,13 @@ class MyProfileView(RedirectView):
             return reverse(
                 settings.LOGIN_URL
             )
+
+
+class InboxListView(LoginRequiredMixin, ListView):
+    template_name = 'core/inbox.html'
+
+    def get_queryset(self):
+        qs = Question.objects.all_that_not_answered(
+            self.request.user
+        )
+        return qs

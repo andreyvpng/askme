@@ -22,6 +22,11 @@ class QuestionManager(models.Manager):
         qs = qs.order_by('-created')
         return qs
 
+    def all_that_not_answered(self, user):
+        qs = self.all_with_answer()
+        qs = qs.filter(asked_to=user, answer__exact=None)
+        return qs
+
 
 class Question(TimeStampedModel):
     text = models.TextField(default=None)
