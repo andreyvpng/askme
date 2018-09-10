@@ -4,23 +4,5 @@
 {% block title %} {{ object.question.text }} - {{ block.super }} {% endblock %}
 
 {% block body %}
-  <div class="col-sm-12 row">
-    <div class="question">
-      <div class="body">
-        <h1>{{ object.question.text }}</h1>
-      </div>
-      <div class="meta" >
-      {% if object.question.anonymous %}
-        <h6>Asked by Anon to {{ object.question.asked_to }}</h6>
-      {% else %}
-        <h6>Asked by {{ object.question.asked_by }} to {{ object.question.asked_to }}</h6>
-      {% endif %}
-      </div >
-    </div>
-    <div class="answer col-sm-12">
-      <div class="body" >
-        {{ object.text }}
-      </div >
-    </div>
-  </div >
+{% include 'core/common/display_question.html' with question=object.question %}
 {% endblock %}

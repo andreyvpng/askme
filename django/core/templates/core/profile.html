@@ -17,22 +17,7 @@
       <ul class="list-unstyled answers" >
         {% for question in questions %}
           <li class="row">
-            <div class="question">
-              <div class="body">
-                <h1>{{ question.text }}</h1>
-              </div>
-              <div class="meta" >
-                {% if question.anonymous %}
-                  <h6>Asked by Anon</h6>
-                {% else %}
-                  <h6>Asked by {{ question.user }}</h6>
-                {% endif %}
-              </div >
-            </div>
-            <div class="answer col-sm-12">
-              <div class="body" >
-                {{ question.answer.text }}
-              </div >
+            {% include 'core/common/display_question.html' %}
             </div>
           </li>
         {% endfor %}

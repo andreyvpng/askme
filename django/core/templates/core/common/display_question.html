@@ -1,0 +1,19 @@
+<div class="question col-sm-12">
+  <div class="body">
+    <h1>{{ question.text }}</h1>
+  </div>
+  <div class="meta">
+    {% if question.anonymous %}
+    <h6>Asked by Anon to {{ question.asked_to }}</h6>
+    {% else %}
+    <h6>Asked by {{ question.user }} to {{ question.asked_to }}</h6>
+    {% endif %}
+  </div>
+</div>
+{% if question.answer %}
+<div class="answer col-sm-12">
+  <div class="body">
+  {{ question.answer.text }}
+  </div>
+</div>
+{% endif %}
