@@ -9,7 +9,7 @@
       <h1 >{{ object.username }}</h1 >
     </div>
     <div class="col-sm-9 col-md-10" >
-      <form method="post" action="">
+      <form method="post" action="{% url 'core:ask' pk=object.id %}">
         {{ question_form | crispy }}
         {% csrf_token %}
         <button class="btn btn-primary" type="submit" name="action" value="Save" >Ask</button >
