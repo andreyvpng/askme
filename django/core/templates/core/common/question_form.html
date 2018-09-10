@@ -1,0 +1,6 @@
+{% load crispy_forms_tags %}
+<form method="post" action="{% url 'core:ask' pk=asked_to %}">
+  {{ question_form | crispy }}
+  {% csrf_token %}
+  <button class="btn btn-primary" type="submit" name="action" value="Save" >Ask</button >
+</form>
