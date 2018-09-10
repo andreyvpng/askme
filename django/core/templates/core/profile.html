@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+
+{% block title %} {{ object.username }} - {{ block.super }} {% endblock %}
+
+{% block body %}
+  <div class="col-sm-12 row">
+    <div class="col-sm-3 col-md-2 text-center" >
+      <h1 >{{ object.username }}</h1 >
+    </div>
+    <div class="col-sm-9 col-md-10" >
+      <form method="post" action="">
+        {{ question_form | crispy }}
+        {% csrf_token %}
+        <button class="btn btn-primary" type="submit" name="action" value="Save" >Ask</button >
+      </form>
+      <ul class="list-unstyled answers" >
+        {% for question in questions %}
+          <li class="row">
+            <div class="question">
+              <div class="body">
+                <h1>{{ question.text }}</h1>
+              </div>
+              <div class="meta" >
+                {% if question.anonymous %}
+                  <h6>Asked by Anon</h6>
+                {% else %}
+                  <h6>Asked by {{ question.user }}</h6>
+                {% endif %}
+              </div >
+            </div>
+            <div class="answer col-sm-12">
+              <div class="body" >
+                {{ question.answer.text }}
+              </div >
+            </div>
+          </li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div >
+{% endblock %}
