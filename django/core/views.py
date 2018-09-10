@@ -5,7 +5,11 @@ from django.urls.base import reverse
 from django.views.generic import CreateView, DetailView, RedirectView
 
 from .forms import QuestionForm
-from .models import Question
+from .models import Answer, Question
+
+
+class AnswerDetailView(DetailView):
+    model = Answer
 
 
 class CreateQuestionView(LoginRequiredMixin, CreateView):

@@ -9,5 +9,7 @@ urlpatterns = [
     path('u/<int:pk>/ask/',
          views.CreateQuestionView.as_view(), name='ask'),
     path('',
-         views.MyProfileView.as_view(), name='my_profile')
+         views.MyProfileView.as_view(), name='my_profile'),
+    path('q/<int:pk>/',
+         views.AnswerDetailView.as_view(), name='answer-detail')
 ]
