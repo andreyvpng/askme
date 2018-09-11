@@ -14,6 +14,8 @@
         <a class="navbar-brand" href="/" >Ask Me</a>
         <ul class="navbar-nav">
           {% if user.is_authenticated %}
+          <li class="nav-item" ><a class="nav-link" href="{% url "user:my-profile" %}">My profile</a ></li>
+          <li class="nav-item" ><a class="nav-link" href="{% url "user:inbox" %}">Inbox</a ></li>
           <li class="nav-item" ><a class="nav-link" href="{% url "user:logout" %}">Logout</a ></li>
           {% else %}
           <li class="nav-item" ><a class="nav-link" href="{% url "user:login" %}">Login</a ></li>

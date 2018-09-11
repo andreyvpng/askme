@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+
+{% block title %} {{ object.username }} - {{ block.super }} {% endblock %}
+
+{% block body %}
+  <div class="col-sm-12">
+    <h1 >Username: {{ object.username }}</h1 >
+    {% include 'core/common/question_form.html' with asked_to=object.id %}
+    <ul class="list-unstyled answers" >
+      {% for question in questions %}
+        <li class="row pt-3">
+          {% include 'core/common/display_question.html' %}
+        </li>
+      {% endfor %}
+    </ul>
+  </div >
+{% endblock %}
