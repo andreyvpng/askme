@@ -3,7 +3,8 @@ from django.contrib.auth.models import User
 from django.core.exceptions import ObjectDoesNotExist, PermissionDenied
 from django.http.response import HttpResponseBadRequest
 from django.urls.base import reverse
-from django.views.generic import CreateView, DetailView
+from django.urls import reverse_lazy
+from django.views.generic import CreateView, DetailView, DeleteView
 
 from .forms import AnswerForm, QuestionForm
 from .models import Answer, Question
@@ -30,6 +31,19 @@ class AnswerCreateView(LoginRequiredMixin, CreateView):
 
     def get_question(self):
         return Question.objects.get(id=self.kwargs['pk'])
+
+
+class AnswerDeleteView(LoginRequiredMixin, DeleteView):
+    model = Answer
+    success_url = reverse_lazy('user:my-profile')
+
+    def dispatch(self, *args, **kwargs):
+        answer = self.get_object()
+
+        if answer.question.asked_to != self.request.user:
+            raise PermissionDenied
+
+        return super().dispatch(*args, **kwargs)
 
 
 class PrivateQuestionDetailView(DetailView):

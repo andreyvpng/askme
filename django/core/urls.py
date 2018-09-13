@@ -15,5 +15,8 @@ urlpatterns = [
          name='private-question'),
     path('private-question/<int:pk>/create',
          views.AnswerCreateView.as_view(),
-         name='answer-create')
+         name='answer-create'),
+    path('answer/<int:pk>/delete',
+         views.AnswerDeleteView.as_view(),
+         name='answer-delete')
 ]
