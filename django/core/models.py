@@ -1,5 +1,6 @@
 from django.contrib.auth.models import User
 from django.db import models
+from django.urls.base import reverse
 
 
 class TimeStampedModel(models.Model):
@@ -63,3 +64,8 @@ class Answer(TimeStampedModel):
 
     def __str__(self):
         return self.text[:75]
+
+    def get_absolute_url(self):
+        return reverse('core:answer-detail', kwargs={
+            'pk': self.id
+        })
