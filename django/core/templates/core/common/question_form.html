@@ -1,17 +1,20 @@
 {% load crispy_forms_tags %}
 
 <form method="post" action="{% url 'core:ask' pk=asked_to %}">
-  <div class="form-group">
+  <fieldset>
     {% csrf_token %}
-    <form>
-      <fieldset class="form-group">
-        <label for="exampleTextarea">Ask a Question</label>
-        <textarea name="text" class="form-control" id="exampleTextarea" rows="3"></textarea>
-      </fieldset>
-
-      <fieldset class="form-group">
-        <button type="submit" class="btn btn-primary"><span class="oi oi-check"></span> Submit</button>
-      </fieldset>
-    </form>
-  </div>
+    <fieldset class="form-group">
+      <label for="exampleTextarea">Ask a Question</label>
+      <textarea name="text" class="form-control" id="exampleTextarea" rows="3"></textarea>
+    </fieldset>
+    <fieldset class="form-check">
+      <div class="form-check-label custom-control custom-checkbox">
+        <input class="custom-control-input" id="customCheck1" checked="" type="checkbox" name="anonymous">
+        <label class="custom-control-label" for="customCheck1">
+          Anonymous
+        </label>
+      </div>
+    </fieldset>
+    <button type="submit" class="btn btn-primary"><span class="oi oi-check"></span> Submit</button>
+  </fieldset>
 </form>

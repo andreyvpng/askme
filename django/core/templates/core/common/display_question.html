@@ -1,11 +1,23 @@
-
-<h2>{{ question.text }}</h2>
-
-{% if question.anonymous %}
-<p class="meta"><small>Asked by Anon to {{ question.asked_to }}</small></p>
+{% if question.answer %}
+<h2><a href="{% url 'core:answer-detail' pk=question.answer.id %}">{{ question.text }}</a></h2>
 {% else %}
-<p class="meta"><small>Asked by {{ question.user }} to {{ question.asked_to }}</small></p>
+  <h2>{{ question.text }}</h2>
 {% endif %}
+
+<p class="meta">
+<small>Asked by
+  {% if question.anonymous %}
+  Anon
+  {% else %}
+  <a href="{% url 'user:profile' pk=question.asked_by.id %}">
+    {{ question.asked_by }}
+  </a>
+  {% endif %} to
+  <a href="{% url 'user:profile' pk=question.asked_to.id %}">
+    {{ question.asked_to }}
+  </a>
+</small>
+</p>
 
 {% if question.answer %}
 <p>{{ question.answer.text }}</p>
