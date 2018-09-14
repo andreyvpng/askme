@@ -34,7 +34,7 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarColor01">
         <ul class="navbar-nav ml-auto">
-          {% if user.is_authenticated %}
+          {% if request.user.is_authenticated %}
           <li class="nav-item">
             <a class="nav-link" href="{% url "user:my-profile" %}"><span class="oi oi-home"></span> Home</a>
           </li>
