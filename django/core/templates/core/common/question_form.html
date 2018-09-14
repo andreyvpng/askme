@@ -1,6 +1,17 @@
 {% load crispy_forms_tags %}
+
 <form method="post" action="{% url 'core:ask' pk=asked_to %}">
-  {{ question_form | crispy }}
-  {% csrf_token %}
-  <button class="btn btn-primary" type="submit" name="action" value="Save" >Ask</button >
+  <div class="form-group">
+    {% csrf_token %}
+    <form>
+      <fieldset class="form-group">
+        <label for="exampleTextarea">Ask a Question</label>
+        <textarea name="text" class="form-control" id="exampleTextarea" rows="3"></textarea>
+      </fieldset>
+
+      <fieldset class="form-group">
+        <button type="submit" class="btn btn-primary"><span class="oi oi-check"></span> Submit</button>
+      </fieldset>
+    </form>
+  </div>
 </form>

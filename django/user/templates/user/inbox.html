@@ -4,10 +4,14 @@
 {% block title %} Inbox - {{ block.super }} {% endblock %}
 
 {% block body %}
-  <div class="col-sm-12 row">
-    {% for question in object_list %}
-      {% include 'core/common/display_question.html' %}
-      <a href="{% url 'core:private-question' pk=question.id %}">Answer</a>
-    {% endfor %}
-  </div >
+{% for question in object_list %}
+<div class="col-sm-12 row">
+  <div class="col-sm-10">
+    {% include 'core/common/display_question.html' %}
+  </div>
+  <div class="col-sm-2 align-self-center text-center">
+    <a href="{% url 'core:private-question' pk=question.id %}">Answer</a>
+  </div>
+</div >
+{% endfor %}
 {% endblock %}

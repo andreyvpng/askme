@@ -1,26 +1,24 @@
-<div class="question col-sm-12">
-  <div class="body">
-    <h1>{{ question.text }}</h1>
-  </div>
-  <div class="meta">
-    {% if question.anonymous %}
-    <h6>Asked by Anon to {{ question.asked_to }}</h6>
-    {% else %}
-    <h6>Asked by {{ question.user }} to {{ question.asked_to }}</h6>
-    {% endif %}
-  </div>
-</div>
-{% if question.answer %}
-<div class="answer col-sm-12">
-  <div class="body">
-  {{ question.answer.text }}
 
-   {% if question.asked_to == request.user %}
-    <form method="POST" action="{% url 'core:answer-delete' pk=question.answer.id %}">
-      {% csrf_token %}
-      <input class="btn btn-danger" type="submit" value="DELETE">
-    </form>
-   {% endif %}
-  </div>
-</div>
+<h2>{{ question.text }}</h2>
+
+{% if question.anonymous %}
+<p class="meta"><small>Asked by Anon to {{ question.asked_to }}</small></p>
+{% else %}
+<p class="meta"><small>Asked by {{ question.user }} to {{ question.asked_to }}</small></p>
+{% endif %}
+
+{% if question.answer %}
+<p>{{ question.answer.text }}</p>
+
+{% if question.asked_to == request.user %}
+<form method="POST" action="{% url 'core:answer-delete' pk=question.answer.id %}">
+  {% csrf_token %}
+
+  <button type="submit" id="completed-task" class="fabutton">
+    <span class="oi oi-trash"></span>
+  </button>
+
+</form>
+{% endif %}
+
 {% endif %}

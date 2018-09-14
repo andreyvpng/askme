@@ -4,15 +4,24 @@
 {% block title %} {{ object.username }} - {{ block.super }} {% endblock %}
 
 {% block body %}
-  <div class="col-sm-12">
-    <h1 >Username: {{ object.username }}</h1 >
+
+<div class="avatar text-center col-sm-12 mt-4">
+  <img src="https://octodex.github.com/images/scubatocat.png" alt="" class="img-responsive img-thumbnail">
+  <h2>{{ object.username }}</h2>
+</div>
+
+<div class="row col-sm-12 mt-4">
+  <div class="col-sm-8">
+    {% for question in questions %}
+    <div class="col-sm-12 question pt-4">
+      {% include 'core/common/display_question.html' %}
+    </div>
+    {% empty %}
+    empty
+    {% endfor %}
+  </div>
+  <div class="col-sm-4">
     {% include 'core/common/question_form.html' with asked_to=object.id %}
-    <ul class="list-unstyled answers" >
-      {% for question in questions %}
-        <li class="row pt-3">
-          {% include 'core/common/display_question.html' %}
-        </li>
-      {% endfor %}
-    </ul>
-  </div >
+  </div>
+</div>
 {% endblock %}
