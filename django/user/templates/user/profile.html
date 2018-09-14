@@ -10,17 +10,17 @@
   <h2>{{ object.username }}</h2>
 </div>
 
-<div class="row col-sm-12 mt-4">
-  <div class="col-sm-8">
+<div class="d-flexf lex-nowrap row col-sm-12 mt-4">
+  <div class="order-2 order-sm-1 col-sm-8">
     {% for question in questions %}
     <div class="col-sm-12 question pt-4">
       {% include 'core/common/display_question.html' %}
     </div>
     {% empty %}
-    empty
+    <p>empty</p>
     {% endfor %}
   </div>
-  <div class="col-sm-4">
+  <div class="order-1 order-sm-2 col-sm-4">
     {% include 'core/common/question_form.html' with asked_to=object.id %}
   </div>
 </div>

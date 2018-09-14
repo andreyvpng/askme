@@ -13,5 +13,7 @@
     <a href="{% url 'core:private-question' pk=question.id %}">Answer</a>
   </div>
 </div >
+{% empty %}
+   <p>empty</p>
 {% endfor %}
 {% endblock %}
