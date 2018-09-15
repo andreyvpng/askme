@@ -10,7 +10,7 @@
     {% include 'core/common/display_question.html' %}
   </div>
   <div class="col-sm-2 align-self-center text-center">
-    <a href="{% url 'core:private-question' pk=question.id %}">Answer</a>
+    <a href="{% url 'core:private-question' pk=question.id %}"><span class="octicon octicon-reply"></span></a>
   </div>
 </div >
 {% empty %}

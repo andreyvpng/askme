@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>{% block title %}Ask me{% endblock %}</title>
     <link rel='stylesheet' href="https://bootswatch.com/4/united/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/open-iconic/1.1.1/font/css/open-iconic-bootstrap.min.css" integrity="sha256-BJ/G+e+y7bQdrYkS2RBTyNfBHpA9IuGaPmf9htub5MQ=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/octicons/4.3.0/font/octicons.min.css" media="all">
     <style>
 .container {
   max-width: 800px;
@@ -23,7 +23,7 @@
   background: none;
   padding: 0px;
   border: 0px;
-  color: #333;
+  color: #e95420;
 }
     </style>
   </head>
@@ -31,29 +31,29 @@
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
       <a class="navbar-brand" href="#">Ask me</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="oi oi-menu"></span>
+        <span class="octicon octicon-three-bars"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarColor01">
         <ul class="navbar-nav ml-auto">
           {% if request.user.is_authenticated %}
           <li class="nav-item">
-            <a class="nav-link" href="{% url "user:my-profile" %}"><span class="oi oi-home"></span> Home</a>
+            <a class="nav-link" href="{% url "user:my-profile" %}"><span class="octicon octicon-home"></span> Home</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="{% url "user:my-profile" %}"><span class="oi oi-person"></span> My profile</a>
+            <a class="nav-link" href="{% url "user:my-profile" %}"><span class="octicon octicon-person"></span> My profile</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="{% url "user:inbox" %}"><span class="oi oi-inbox"></span> Inbox</a>
+            <a class="nav-link" href="{% url "user:inbox" %}"><span class="octicon octicon-inbox"></span> Inbox</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="{% url "user:logout" %}"><span class="oi oi-account-logout"></span> Logout</a>
+            <a class="nav-link" href="{% url "user:logout" %}"><span class="octicon octicon-sign-out"></span> Logout</a>
           </li>
           {% else %}
           <li class="nav-item">
-            <a class="nav-link" href="{% url "user:login" %}"><span class="oi oi-account-login"></span> Login</a>
+            <a class="nav-link" href="{% url "user:login" %}"><span class="octicon octicon-sign-in"></span> Login</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="{% url "user:register" %}"><span class="oi oi-account-login"></span> Register</a>
+            <a class="nav-link" href="{% url "user:register" %}"><span class="octicon octicon-sign-out"></span> Register</a>
           </li>
           {% endif %}
         </ul>
