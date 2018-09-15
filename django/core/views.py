@@ -71,7 +71,7 @@ class PrivateQuestionDetailView(DetailView):
         return ctx
 
 
-class CreateQuestionView(LoginRequiredMixin, CreateView):
+class QuestionCreateView(LoginRequiredMixin, CreateView):
     model = Question
     form_class = QuestionForm
 
@@ -90,3 +90,16 @@ class CreateQuestionView(LoginRequiredMixin, CreateView):
 
     def get_user(self):
         return User.objects.get(id=self.kwargs['pk'])
+
+
+class QuestionDeleteView(LoginRequiredMixin, DeleteView):
+    model = Question
+    success_url = reverse_lazy('user:inbox')
+
+    def dispatch(self, *args, **kwargs):
+        question = self.get_object()
+
+        if question.asked_to != self.request.user:
+            raise PermissionDenied
+
+        return super().dispatch(*args, **kwargs)
