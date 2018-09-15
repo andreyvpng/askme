@@ -27,6 +27,7 @@ class QuestionManager(models.Manager):
     def all_that_not_answered(self, user):
         qs = self.all_with_answer()
         qs = qs.filter(asked_to=user, answer__exact=None)
+        qs = qs.order_by('-created')
         return qs
 
 
