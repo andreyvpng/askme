@@ -9,11 +9,20 @@
   <div class="col-sm-10">
     {% include 'core/common/display_question.html' %}
   </div>
-  <div class="col-sm-2 align-self-center text-center">
+  <div class="row col-sm-2 align-self-center text-center">
     <a href="{% url 'core:private-question' pk=question.id %}"><span class="octicon octicon-reply"></span></a>
+
+    <form method="POST" action="{% url 'core:question-delete' pk=question.id %}">
+      {% csrf_token %}
+
+      <button type="submit" id="completed-task" class="fabutton">
+        <span class="octicon octicon-trashcan"></span>
+      </button>
+
+    </form>
   </div>
 </div >
 {% empty %}
-   <p>empty</p>
+<p>empty</p>
 {% endfor %}
 {% endblock %}
