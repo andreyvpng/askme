@@ -72,7 +72,7 @@ class Answer(TimeStampedModel):
         })
 
     def total_likes(self):
-        return self.likes.count()
+        return self.liked_answer.count()
 
 
 class Like(TimeStampedModel):
