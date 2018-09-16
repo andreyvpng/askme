@@ -115,8 +115,6 @@ class LikeCreateView(LoginRequiredMixin, CreateView):
         self.object.answer = self.get_answer()
         self.object.save()
 
-        # return HttpResponseRedirect(self.get_success_url())
-
         return super().form_valid(form)
 
     def get_success_url(self):
