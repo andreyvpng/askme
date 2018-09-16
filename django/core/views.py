@@ -1,13 +1,13 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.models import User
 from django.core.exceptions import ObjectDoesNotExist, PermissionDenied
-from django.http.response import HttpResponseBadRequest
-from django.urls.base import reverse
+from django.http.response import HttpResponseBadRequest, HttpResponseRedirect
 from django.urls import reverse_lazy
-from django.views.generic import CreateView, DetailView, DeleteView
+from django.urls.base import reverse
+from django.views.generic import CreateView, DeleteView, DetailView
 
 from .forms import AnswerForm, QuestionForm
-from .models import Answer, Question
+from .models import Answer, Like, Question
 
 
 class AnswerDetailView(DetailView):
@@ -103,3 +103,26 @@ class QuestionDeleteView(LoginRequiredMixin, DeleteView):
             raise PermissionDenied
 
         return super().dispatch(*args, **kwargs)
+
+
+class LikeCreateView(LoginRequiredMixin, CreateView):
+    model = Like
+    fields = []
+
+    def form_valid(self, form):
+        self.object = form.save(commit=False)
+        self.object.liked_by = self.request.user
+        self.object.answer = self.get_answer()
+        self.object.save()
+
+        # return HttpResponseRedirect(self.get_success_url())
+
+        return super().form_valid(form)
+
+    def get_success_url(self):
+        return reverse('core:answer-detail', kwargs={
+            'pk': self.object.answer.id
+        })
+
+    def get_answer(self):
+        return Answer.objects.get(id=self.kwargs['pk'])
