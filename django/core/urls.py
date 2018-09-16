@@ -24,5 +24,8 @@ urlpatterns = [
          name='answer-delete'),
     path('answer/<int:pk>/like',
          views.LikeCreateView.as_view(),
-         name='like-create')
+         name='like-create'),
+    path('answer/<int:pk>/unlike',
+         views.LikeDeleteView.as_view(),
+         name='like-delete')
 ]

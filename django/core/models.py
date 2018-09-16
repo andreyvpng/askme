@@ -71,12 +71,17 @@ class Answer(TimeStampedModel):
             'pk': self.id
         })
 
+    def total_likes(self):
+        return self.likes.count()
+
 
 class Like(TimeStampedModel):
     answer = models.ForeignKey(Answer,
+                               related_name='liked_answer',
                                default=None,
                                on_delete=models.CASCADE)
     liked_by = models.ForeignKey(User,
+                                 related_name='liker',
                                  on_delete=models.CASCADE)
 
     def __str__(self):

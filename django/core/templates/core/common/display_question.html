@@ -1,7 +1,7 @@
 {% if question.answer %}
 <h2><a href="{% url 'core:answer-detail' pk=question.answer.id %}">{{ question.text }}</a></h2>
 {% else %}
-  <h2>{{ question.text }}</h2>
+<h2>{{ question.text }}</h2>
 {% endif %}
 
 <p class="meta">
@@ -22,15 +22,29 @@
 {% if question.answer %}
 <p>{{ question.answer.text }}</p>
 
-{% if question.asked_to == request.user %}
-<form method="POST" action="{% url 'core:answer-delete' pk=question.answer.id %}">
-  {% csrf_token %}
+<div class="row action">
+  {% if request.user.is_authenticated %}
+  <form method="post" action="{% url 'core:like-create' pk=question.answer.id %}">
+    <fieldset>
+      {% csrf_token %}
 
-  <button type="submit" id="completed-task" class="fabutton">
-    <span class="octicon octicon-trashcan"></span>
-  </button>
+      <button type="submit" id="completed-task" class="fabutton">
+        {{ question.answer.total_likes }}
+        <span class="octicon octicon-heart"></span>
+      </button>
+    </fieldset>
+  </form>
+  {% endif %}
 
-</form>
-{% endif %}
+  {% if question.asked_to == request.user %}
+  <form method="POST" action="{% url 'core:answer-delete' pk=question.answer.id %}">
+    {% csrf_token %}
 
+    <button type="submit" id="completed-task" class="fabutton">
+      <span class="octicon octicon-trashcan"></span>
+    </button>
+
+  </form>
+  {% endif %}
+</div>
 {% endif %}

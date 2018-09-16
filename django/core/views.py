@@ -1,7 +1,7 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.models import User
 from django.core.exceptions import ObjectDoesNotExist, PermissionDenied
-from django.http.response import HttpResponseBadRequest, HttpResponseRedirect
+from django.http.response import HttpResponseBadRequest
 from django.urls import reverse_lazy
 from django.urls.base import reverse
 from django.views.generic import CreateView, DeleteView, DetailView
@@ -113,6 +113,7 @@ class LikeCreateView(LoginRequiredMixin, CreateView):
         self.object = form.save(commit=False)
         self.object.liked_by = self.request.user
         self.object.answer = self.get_answer()
+
         self.object.save()
 
         return super().form_valid(form)
@@ -120,6 +121,26 @@ class LikeCreateView(LoginRequiredMixin, CreateView):
     def get_success_url(self):
         return reverse('core:answer-detail', kwargs={
             'pk': self.object.answer.id
+        })
+
+    def get_answer(self):
+        return Answer.objects.get(id=self.kwargs['pk'])
+
+
+class LikeDeleteView(LoginRequiredMixin, DeleteView):
+    model = Like
+
+    def dispatch(self, *args, **kwargs):
+        like = self.get_object()
+
+        if like.liked_by != self.request.user:
+            raise PermissionDenied
+
+        return super().dispatch(*args, **kwargs)
+
+    def get_success_url(self):
+        return reverse('core:answer-detail', kwargs={
+            'pk': self.get_answer().id
         })
 
     def get_answer(self):
