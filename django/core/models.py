@@ -70,3 +70,19 @@ class Answer(TimeStampedModel):
         return reverse('core:answer-detail', kwargs={
             'pk': self.id
         })
+
+
+class Like(TimeStampedModel):
+    answer = models.ForeignKey(Answer,
+                               default=None,
+                               on_delete=models.CASCADE)
+    liked_by = models.ForeignKey(User,
+                                 on_delete=models.CASCADE)
+
+    def __str__(self):
+        return '{}: {}'.format(self.liked_by,
+                               self.answer)
+
+    class Meta:
+        unique_together = (('answer', 'liked_by'))
+        default_related_name = 'likes'
