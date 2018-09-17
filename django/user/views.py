@@ -16,6 +16,14 @@ class RegisterView(CreateView):
         return reverse('user:login')
 
 
+class UserListView(ListView):
+    template_name = 'user/user_list.html'
+
+    def get_queryset(self):
+        qs = User.objects.order_by('username')
+        return qs
+
+
 class ProfileDetailView(DetailView):
     model = User
     template_name = 'user/profile.html'
