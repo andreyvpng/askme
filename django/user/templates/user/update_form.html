@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+
+{% block body %}
+<div class="col-sm-12" >
+  <h3 >Update settings</h3 >
+  <form method="post"
+        action="{% url "user:user-update" pk=object.pk %}" >
+    {{ form | crispy }}
+    {% csrf_token %}
+    <button class="btn btn-primary" type="submit" name="action" value="SAVE" >Save</button >
+  </form >
+</div > 
+{% endblock %}

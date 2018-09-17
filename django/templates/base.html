@@ -72,6 +72,9 @@ html {
             <a class="nav-link" href="{% url "user:inbox" %}"><span class="octicon octicon-inbox"></span> Inbox</a>
           </li>
           <li class="nav-item">
+            <a class="nav-link" href="{% url "user:user-update" pk=request.user.id %}"><span class="octicon octicon-gear"></span> Settings</a>
+          </li>
+          <li class="nav-item">
             <a class="nav-link" href="{% url "user:logout" %}"><span class="octicon octicon-sign-out"></span> Logout</a>
           </li>
           {% else %}
