@@ -2,11 +2,12 @@ from core.forms import QuestionForm
 from core.models import Question
 from django.conf import settings
 from django.contrib.auth import get_user_model
+from django.core.exceptions import PermissionDenied
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse
-from django.views.generic import CreateView, DetailView, ListView, RedirectView
+from django.views.generic import CreateView, DetailView, ListView, RedirectView, UpdateView
 
-from .forms import RegisterForm
+from .forms import RegisterForm, UserForm
 
 User = get_user_model()
 
@@ -63,6 +64,20 @@ class MyProfileView(RedirectView):
             return reverse(
                 settings.LOGIN_URL
             )
+
+
+class UserUpdateView(UpdateView):
+    model = User
+    form_class = UserForm
+    template_name = 'user/update_form.html'
+
+    def dispatch(self, *args, **kwargs):
+        user = self.get_object()
+
+        if user != self.request.user:
+            raise PermissionDenied
+
+        return super().dispatch(*args, **kwargs)
 
 
 class InboxListView(LoginRequiredMixin, ListView):

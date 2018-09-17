@@ -1,5 +1,26 @@
 from django.contrib.auth.models import AbstractUser
+from django.db import models
+from django.urls import reverse
 
 
 class User(AbstractUser):
-    pass
+    location = models.CharField(max_length=100, null=True)
+
+    NOT_CHOSEN = 'N'
+    MALE = 'M'
+    FEMALE = 'F'
+    GENDERS = (
+        (NOT_CHOSEN, 'Not Chosen'),
+        (MALE, 'Male'),
+        (FEMALE, 'Female'),
+    )
+    gender = models.CharField(
+        max_length=2,
+        choices=GENDERS,
+        default=NOT_CHOSEN,
+    )
+
+    def get_absolute_url(self):
+        return reverse('user:profile', kwargs={
+            'pk': self.id
+        })

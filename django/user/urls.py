@@ -18,5 +18,7 @@ urlpatterns = [
     path('<int:pk>/',
          views.ProfileDetailView.as_view(), name='profile'),
     path('inbox',
-         views.InboxListView.as_view(), name='inbox')
+         views.InboxListView.as_view(), name='inbox'),
+    path('<int:pk>/update',
+         views.UserUpdateView.as_view(), name='user-update')
 ]
