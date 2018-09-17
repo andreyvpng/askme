@@ -53,6 +53,12 @@ class AnswerManager(models.Manager):
     def all_with_question(self):
         qs = self.get_queryset()
         qs = qs.select_related('question')
+        qs = qs.prefetch_related(
+            models.Prefetch(
+                'liked_answer',
+                queryset=Like.objects.select_related('liked_by'),
+                to_attr='liker'
+            ))
         return qs
 
 

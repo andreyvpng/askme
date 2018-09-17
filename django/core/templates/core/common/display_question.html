@@ -24,7 +24,7 @@
 
 <div class="row action">
   {% if request.user.is_authenticated %}
-  <form method="post" action="{% url 'core:like-create' pk=question.answer.id %}">
+  <form method="post" action="{% url 'core:like-answer' pk=question.answer.id %}">
     <fieldset>
       {% csrf_token %}
 
@@ -47,4 +47,11 @@
   </form>
   {% endif %}
 </div>
+
+{% if question.answer.liker %}
+<h5>Likers</h5>
+{% for liker in question.answer.liker %}
+  {{liker.liked_by}}
+{% endfor %}
+{% endif %}
 {% endif %}

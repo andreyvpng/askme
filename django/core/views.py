@@ -1,10 +1,10 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.models import User
 from django.core.exceptions import ObjectDoesNotExist, PermissionDenied
-from django.http.response import HttpResponseBadRequest
+from django.http.response import HttpResponseBadRequest, HttpResponseRedirect
 from django.urls import reverse_lazy
 from django.urls.base import reverse
-from django.views.generic import CreateView, DeleteView, DetailView
+from django.views.generic import CreateView, DeleteView, DetailView, View
 
 from .forms import AnswerForm, QuestionForm
 from .models import Answer, Like, Question
@@ -105,43 +105,18 @@ class QuestionDeleteView(LoginRequiredMixin, DeleteView):
         return super().dispatch(*args, **kwargs)
 
 
-class LikeCreateView(LoginRequiredMixin, CreateView):
-    model = Like
-    fields = []
+class LikeView(LoginRequiredMixin, View):
 
-    def form_valid(self, form):
-        self.object = form.save(commit=False)
-        self.object.liked_by = self.request.user
-        self.object.answer = self.get_answer()
+    def post(self, request, pk):
 
-        self.object.save()
+        answer = Answer.objects.get(id=pk)
+        like = Like.objects.filter(answer=answer,
+                                   liked_by=request.user)
 
-        return super().form_valid(form)
-
-    def get_success_url(self):
-        return reverse('core:answer-detail', kwargs={
-            'pk': self.object.answer.id
-        })
-
-    def get_answer(self):
-        return Answer.objects.get(id=self.kwargs['pk'])
-
-
-class LikeDeleteView(LoginRequiredMixin, DeleteView):
-    model = Like
-
-    def dispatch(self, *args, **kwargs):
-        like = self.get_object()
-
-        if like.liked_by != self.request.user:
-            raise PermissionDenied
-
-        return super().dispatch(*args, **kwargs)
-
-    def get_success_url(self):
-        return reverse('core:answer-detail', kwargs={
-            'pk': self.get_answer().id
-        })
-
-    def get_answer(self):
-        return Answer.objects.get(id=self.kwargs['pk'])
+        if like:
+            like.delete()
+        else:
+            like = Like.objects.create(answer=answer,
+                                       liked_by=request.user)
+            like.save()
+        return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
