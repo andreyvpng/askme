@@ -1,11 +1,13 @@
 from core.forms import QuestionForm
 from core.models import Question
 from django.conf import settings
+from django.contrib.auth import get_user_model
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.contrib.auth.models import User
 from django.urls import reverse
 from django.views.generic import CreateView, DetailView, ListView, RedirectView
+
+User = get_user_model()
 
 
 class RegisterView(CreateView):

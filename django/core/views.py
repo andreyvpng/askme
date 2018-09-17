@@ -1,5 +1,5 @@
+from django.contrib.auth import get_user_model
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.contrib.auth.models import User
 from django.core.exceptions import ObjectDoesNotExist, PermissionDenied
 from django.http.response import HttpResponseBadRequest, HttpResponseRedirect
 from django.urls import reverse_lazy
@@ -8,6 +8,8 @@ from django.views.generic import CreateView, DeleteView, DetailView, View
 
 from .forms import AnswerForm, QuestionForm
 from .models import Answer, Like, Question
+
+User = get_user_model()
 
 
 class AnswerDetailView(DetailView):

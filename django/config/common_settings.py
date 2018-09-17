@@ -139,3 +139,7 @@ LOGOUT_REDIRECT_URL = 'user:login'
 # Crispy
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
+
+# Auth
+AUTH_USER_MODEL = 'user.User'
