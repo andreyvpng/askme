@@ -1,6 +1,6 @@
 # Ask me
 
-A ask.fm clone development with django 2
+The web application for people who likes to ask questions and get answers from others.
 
 Add .env. For developping I'm using this:
 
