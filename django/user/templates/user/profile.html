@@ -21,7 +21,11 @@
     {% endfor %}
   </div>
   <div class="order-1 order-sm-2 col-sm-4">
+    {% if request.user.is_authenticated %}
     {% include 'core/common/question_form.html' with asked_to=object.id %}
+    {% else %}
+    Want to ask a question? <a href="{% url 'user:login' %}">Login</a> now.
+    {% endif %}
   </div>
 </div>
 {% endblock %}
