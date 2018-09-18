@@ -1,3 +1,5 @@
 __pycache__/
+django/htmlcov
+django/.coverage
 *.py[cod]
 .env
