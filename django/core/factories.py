@@ -1,5 +1,6 @@
-import factory
 from user.factories import UserFactory
+
+import factory
 
 from .models import Answer, Question
 

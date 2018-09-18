@@ -15,7 +15,7 @@ urlpatterns = [
          views.MyProfileView.as_view(), name='my-profile'),
     path('',
          views.UserListView.as_view(), name='user-list'),
-    path('<int:pk>/',
+    path('<int:pk>',
          views.ProfileDetailView.as_view(), name='profile'),
     path('inbox',
          views.InboxListView.as_view(), name='inbox'),
