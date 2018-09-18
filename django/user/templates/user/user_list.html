@@ -5,7 +5,11 @@
 <ul class="list-unstyled">
   {% for object in object_list %}
   <li class="media">
-    <img class="mr-3" src="https://octodex.github.com/images/scubatocat.png" alt="Generic placeholder image">
+    {% if object.avatar_url %}
+    <img class='mr-3' src="{{ object.avatar_url }}" alt="">
+    {% else %}
+    <img class='mr-3' src="https://octodex.github.com/images/scubatocat.png" alt="" class="img-responsive img-thumbnail">
+    {% endif %}
     <div class="media-body">
       <a href="{% url 'user:profile' pk=object.id %}"><h5 class="mt-0 mb-1">{{ object }}</h5></a>
     </div>

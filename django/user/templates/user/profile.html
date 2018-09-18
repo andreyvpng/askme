@@ -6,12 +6,19 @@
 {% block body %}
 
 <div class="avatar text-center col-sm-12">
+  {% if object.avatar_url %}
+  <img src="{{ object.avatar_url }}" alt="" class="img-responsive img-thumbnail">
+  {% else %}
   <img src="https://octodex.github.com/images/scubatocat.png" alt="" class="img-responsive img-thumbnail">
+  {% endif %}
   <h2>{{ object.username }}</h2>
   {% if object.location %}
-  <p>{{ object.location }}</p>
+  <p>Location: {{ object.location }}</p>
   {% endif %}
   <p>Gender: {{ object.get_gender_display }}</p>
+  {% if object.bio %}
+  <p>Bio: {{ object.bio }}</p>
+  {% endif %}
 </div>
 
 <div class="d-flexf lex-nowrap row col-sm-12 mt-4">
