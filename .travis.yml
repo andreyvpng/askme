@@ -9,7 +9,8 @@ install:
   - pip install -r requirements.dev.txt
 
 script:
-  - python django/manage.py test
+  - cd django
+  - python manage.py test
 
 before_script:
   - psql -c 'create database database_testing;' -U postgres
