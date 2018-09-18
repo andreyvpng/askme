@@ -20,6 +20,9 @@ class User(AbstractUser):
         default=NOT_CHOSEN,
     )
 
+    avatar_url = models.URLField(null=True)
+    bio = models.CharField(max_length=200, null=True)
+
     def get_absolute_url(self):
         return reverse('user:profile', kwargs={
             'pk': self.id

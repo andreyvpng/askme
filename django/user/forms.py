@@ -8,7 +8,7 @@ User = get_user_model()
 class UserForm(forms.ModelForm):
     class Meta:
         model = User
-        fields = ['location', 'gender']
+        fields = ['avatar_url', 'bio', 'location', 'gender']
 
 
 class RegisterForm(UserCreationForm):
