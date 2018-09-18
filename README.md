@@ -1,5 +1,7 @@
 # Ask me
 
+[![Build Status](https://travis-ci.org/andreyvpng/askme.svg?branch=master)](https://travis-ci.org/andreyvpng/askme)
+
 The web application for people who likes to ask questions and get answers from others.
 
 Add .env. For developping I'm using this:
