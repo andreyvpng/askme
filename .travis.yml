@@ -1,0 +1,20 @@
+language: python
+python:
+  - "3.6"
+
+services:
+  - postgresql
+
+install:
+  - pip install -r requirements.dev.txt
+
+script:
+  - python django/manage.py test
+
+before_script:
+  - psql -c 'create database database_testing;' -U postgres
+  - export DJANGO_DB_NAME=database_testing
+  - export DJANGO_DB_USER=postgresql
+  - export DJANGO_DB_HOST=localhost
+  - export DJANGO_DB_PORT=5432
+  - export DJANGO_SETTINGS_MODULE=config.dev_settings
