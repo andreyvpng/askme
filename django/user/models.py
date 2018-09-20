@@ -15,7 +15,7 @@ class User(AbstractUser):
         (FEMALE, 'Female'),
     )
     gender = models.CharField(
-        max_length=2,
+        max_length=1,
         choices=GENDERS,
         default=NOT_CHOSEN,
     )
