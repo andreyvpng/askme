@@ -2,10 +2,11 @@ from core.forms import QuestionForm
 from core.models import Question
 from django.conf import settings
 from django.contrib.auth import get_user_model
-from django.core.exceptions import PermissionDenied
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.core.exceptions import PermissionDenied
 from django.urls import reverse
-from django.views.generic import CreateView, DetailView, ListView, RedirectView, UpdateView
+from django.views.generic import (CreateView, DetailView, ListView,
+                                  RedirectView, UpdateView)
 
 from .forms import RegisterForm, UserForm
 
@@ -35,9 +36,10 @@ class ProfileDetailView(DetailView):
     def get_context_data(self, **kwargs):
         ctx = super().get_context_data(**kwargs)
 
-        answered_questions = Question.objects.all_that_have_an_answer(
-            self.object
-        )
+        answered_questions = Question.objects\
+            .all_that_have_an_answer(
+                self.object
+            )
 
         ctx.update({'questions': answered_questions})
 
@@ -66,7 +68,7 @@ class MyProfileView(RedirectView):
             )
 
 
-class UserUpdateView(UpdateView):
+class UserUpdateView(LoginRequiredMixin, UpdateView):
     model = User
     form_class = UserForm
     template_name = 'user/update_form.html'
