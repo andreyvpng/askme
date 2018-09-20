@@ -1,5 +1,6 @@
 # Ask me
 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/47fcd26304534930a2940ab39524d82c)](https://app.codacy.com/app/andreyvpng/askme?utm_source=github.com&utm_medium=referral&utm_content=andreyvpng/askme&utm_campaign=Badge_Grade_Dashboard)
 [![Build Status](https://travis-ci.org/andreyvpng/askme.svg?branch=master)](https://travis-ci.org/andreyvpng/askme)
 
 The web application for people who likes to ask questions and get answers from others.
