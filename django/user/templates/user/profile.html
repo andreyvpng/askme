@@ -5,12 +5,10 @@
 
 {% block body %}
 
-<div class="avatar text-center col-sm-12">
-  {% if object.avatar_url %}
-  <img src="{{ object.avatar_url }}" alt="" class="img-responsive img-thumbnail">
-  {% else %}
-  <img src="https://octodex.github.com/images/scubatocat.png" alt="" class="img-responsive img-thumbnail">
-  {% endif %}
+<div class="profile-info text-center col-sm-12">
+  <div class="avatar"> 
+    <img src="{{ object.avatar_url }}" alt="">
+  </div>
   <h2>{{ object.username }}</h2>
   {% if object.location %}
   <p>Location: {{ object.location }}</p>

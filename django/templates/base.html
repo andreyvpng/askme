@@ -14,11 +14,25 @@ html {
 .container {
   max-width: 800px;
 }
-.avatar {
+.profile-info {
   border-bottom: 1px solid #eee;
 }
+.avatar {
+    width: 250px;
+    height: 250px;
+    margin: 0 auto;
+    border-radius: 50%;
+    overflow: hidden;
+}
 .avatar img {
+  max-width: 100%;
+  max-height: 100%;
+}
+.avatar > img[src='None'] {
   width: 250px;
+  height: 250px;
+  background: url('https://octodex.github.com/images/scubatocat.png');
+  background-size: 250px 250px;
 }
 .question {
   margin-bottom: 30px;
@@ -31,8 +45,13 @@ html {
 }
 .media > img {
   width: 60px;
+  border-radius: 50%;
 }
-
+.media > img[src="None"] {
+  background: url('https://octodex.github.com/images/scubatocat.png');
+  background-size: 60px 60px;
+  height: 60px;
+}
 .footer {
   position: absolute;
   bottom: 0;
