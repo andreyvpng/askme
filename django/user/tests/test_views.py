@@ -38,10 +38,12 @@ class UserUpdateViewTest(TestCase):
 
 class UserListViewTest(TestCase):
     USER_LIST_HTML = """
-      <li class="media">
+      <li class="media mb-2">
         <img class='mr-3' src="{image}" alt="">
         <div class="media-body">
-          <a href="{url}"><h5 class="mt-0 mb-1">{name}</h5></a>
+          <a href="{url}">
+            <h5 class="mt-0 mb-1">{name}</h5>
+          </a>
         </div>
       </li>
     """
