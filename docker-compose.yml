@@ -1,28 +1,28 @@
 version: '3'
 
 services:
-    db:
-        build: docker/psql
-        restart: always
-        ports:
-            - "5432:5432"
-        environment:
-            - DJANGO_DB_NAME
-            - DJANGO_DB_USER
-            - DJANGO_DB_PASSWORD
-    web:
-        build: .
-        volumes:
-            - .:/code
-        ports:
-            - "8000:8000"
-        depends_on:
-            - db
-        environment:
-            - DJANGO_DB_NAME
-            - DJANGO_DB_USER
-            - DJANGO_DB_PASSWORD
-            - DJANGO_DB_HOST
-            - DJANGO_DB_PORT
-            - DJANGO_SETTINGS_MODULE
-            - DJANGO_SECRET_KEY
+  db:
+    build: docker/psql
+    restart: always
+    ports:
+      - "5432:5432"
+    environment:
+      - DJANGO_DB_NAME
+      - DJANGO_DB_USER
+      - DJANGO_DB_PASSWORD
+  web:
+    build: .
+    volumes:
+      - .:/code
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+    environment:
+      - DJANGO_DB_NAME
+      - DJANGO_DB_USER
+      - DJANGO_DB_PASSWORD
+      - DJANGO_DB_HOST
+      - DJANGO_DB_PORT
+      - DJANGO_SETTINGS_MODULE
+      - DJANGO_SECRET_KEY
