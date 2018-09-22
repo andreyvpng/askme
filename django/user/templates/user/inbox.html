@@ -11,18 +11,10 @@
   </div>
   <div class="row col-sm-2 align-self-center text-center">
     <a href="{% url 'core:private-question' pk=question.id %}"><span class="octicon octicon-reply"></span></a>
-
-    <form method="POST" action="{% url 'core:question-delete' pk=question.id %}">
-      {% csrf_token %}
-
-      <button type="submit" id="completed-task" class="fabutton">
-        <span class="octicon octicon-trashcan"></span>
-      </button>
-
-    </form>
+    {% include 'core/common/delete_question_form.html' %}
   </div>
 </div >
 {% empty %}
-<p>empty</p>
+<h2>You have no questions</h2>
 {% endfor %}
 {% endblock %}

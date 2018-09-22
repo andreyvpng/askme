@@ -1,0 +1,10 @@
+<form method="post" action="{% url 'core:like-answer' pk=question.answer.id %}">
+  <fieldset>
+    {% csrf_token %}
+
+    <button type="submit" id="completed-task" class="fabutton">
+      {{ question.answer.total_likes }}
+      <span class="octicon octicon-heart"></span>
+    </button>
+  </fieldset>
+</form>

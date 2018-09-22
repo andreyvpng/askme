@@ -1,13 +1,12 @@
 {% load crispy_forms_tags %}
 
 <form method="post" action="{% url 'core:ask' pk=asked_to %}">
-  <fieldset>
     {% csrf_token %}
     <fieldset class="form-group">
       <label for="exampleTextarea">Ask a Question</label>
-      <textarea name="text" class="form-control" id="exampleTextarea" rows="3"></textarea>
+      <textarea name="text" class="form-control" id="exampleTextarea" rows="2"></textarea>
     </fieldset>
-    <fieldset class="form-check">
+    <fieldset class="form-group">
       <div class="form-check-label custom-control custom-checkbox">
         <input class="custom-control-input" id="customCheck1" checked="" type="checkbox" name="anonymous">
         <label class="custom-control-label" for="customCheck1">
@@ -16,5 +15,4 @@
       </div>
     </fieldset>
     <button type="submit" class="btn btn-primary"><span class="octicon octicon-check"></span> Submit</button>
-  </fieldset>
 </form>

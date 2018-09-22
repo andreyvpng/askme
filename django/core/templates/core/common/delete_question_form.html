@@ -1,0 +1,6 @@
+<form method="POST" action="{% url 'core:question-delete' pk=question.id %}">
+  {% csrf_token %}
+  <button type="submit" id="completed-task" class="fabutton">
+    <span class="octicon octicon-trashcan"></span>
+  </button>
+</form>

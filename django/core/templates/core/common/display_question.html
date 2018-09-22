@@ -9,13 +9,9 @@
   {% if question.anonymous %}
   Anon
   {% else %}
-  <a href="{% url 'user:profile' pk=question.asked_by.id %}">
-    {{ question.asked_by }}
-  </a>
-  {% endif %} to
-  <a href="{% url 'user:profile' pk=question.asked_to.id %}">
-    {{ question.asked_to }}
-  </a>
+  <a href="{% url 'user:profile' pk=question.asked_by.id %}">{{ question.asked_by }}</a>
+  {% endif %}
+  to <a href="{% url 'user:profile' pk=question.asked_to.id %}">{{ question.asked_to }}</a>
 </small>
 </p>
 
@@ -24,34 +20,19 @@
 
 <div class="row action">
   {% if request.user.is_authenticated %}
-  <form method="post" action="{% url 'core:like-answer' pk=question.answer.id %}">
-    <fieldset>
-      {% csrf_token %}
-
-      <button type="submit" id="completed-task" class="fabutton">
-        {{ question.answer.total_likes }}
-        <span class="octicon octicon-heart"></span>
-      </button>
-    </fieldset>
-  </form>
+  {% include 'core/common/like_form.html' %}
   {% endif %}
 
   {% if question.asked_to == request.user %}
-  <form method="POST" action="{% url 'core:answer-delete' pk=question.answer.id %}">
-    {% csrf_token %}
-
-    <button type="submit" id="completed-task" class="fabutton">
-      <span class="octicon octicon-trashcan"></span>
-    </button>
-
-  </form>
+  {% include 'core/common/delete_answer_form.html' %}
   {% endif %}
+
 </div>
 
 {% if question.answer.liker %}
 <h5>Likers</h5>
 {% for liker in question.answer.liker %}
-  {{liker.liked_by}}
+{{liker.liked_by}}
 {% endfor %}
 {% endif %}
 {% endif %}

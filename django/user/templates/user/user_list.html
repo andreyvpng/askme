@@ -1,16 +1,17 @@
 {% extends "base.html" %}
 
 {% block body %}
-
+<h3>Users</h3>
 <ul class="list-unstyled">
   {% for object in object_list %}
-  <li class="media">
+  <li class="media mb-2">
     <img class='mr-3' src="{{ object.avatar_url }}" alt="">
     <div class="media-body">
-      <a href="{% url 'user:profile' pk=object.id %}"><h5 class="mt-0 mb-1">{{ object }}</h5></a>
+      <a href="{% url 'user:profile' pk=object.id %}">
+        <h5 class="mt-0 mb-1">{{ object }}</h5>
+      </a>
     </div>
   </li>
   {% endfor %}
 </ul>
-
 {% endblock %}
