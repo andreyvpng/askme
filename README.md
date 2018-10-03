@@ -5,6 +5,8 @@
 
 The web application for people who likes to ask questions and get answers from others.
 
+![Screenshot](screenshot.png)
+
 Add .env. For developping I'm using this:
 
     DJANGO_DB_NAME=askme
