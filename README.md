@@ -7,6 +7,8 @@ The web application for people who likes to ask questions and get answers from o
 
 ![Screenshot](screenshot.png)
 
+## Build & Run
+
 Add .env. For developping I'm using this:
 
     DJANGO_DB_NAME=askme
@@ -19,3 +21,9 @@ Add .env. For developping I'm using this:
 For build and run, use:
 
     docker-compose build && docker-compose up
+
+## License
+
+askme is free software under terms of the Apache License 2.0
+
+Copyright (C) 2018 by Andrey Varfolomeev
